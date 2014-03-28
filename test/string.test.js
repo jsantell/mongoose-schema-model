@@ -10,7 +10,13 @@ var schema = {
   singleEnum: { type: String, enum: types },
   multiEnum: { type: [String], enum: types },
   singleEnumCustom: { type: String, enum: { values: types, message: "Woops! {TYPE} {VALUE} {PATH}"}},
-  multiEnumCustom: { type: [String], enum: { values: types, message: "Woops! {TYPE} {VALUE} {PATH}"} }
+  multiEnumCustom: { type: [String], enum: { values: types, message: "Woops! {TYPE} {VALUE} {PATH}"} },
+  singleLowercase: { type: String, lowercase: true },
+  multiLowercase: { type: [String], lowercase: true },
+  singleUppercase: { type: String, uppercase: true },
+  multiUppercase: { type: [String], uppercase: true },
+  singleTrim: { type: String, trim: true },
+  multiTrim: { type: [String], trim: true }
 };
 
 var validFn = validation(schema);
@@ -113,5 +119,47 @@ describe("StringSchema.enum", function () {
       var res = validFn({ multiEnumCustom: ["a", "d"] });
       expect(res).to.be.equal("Woops! enum d multiEnumCustom");
     });
+  });
+});
+
+describe("StringSchema.lowercase", function () {
+  it("casts String to lower case", function () {
+    var res = validFn({ singleLowercase: "AbCdEfG" });
+    expect(res.singleLowercase).to.be.equal("abcdefg");
+  });
+  
+  it("casts [String] to lower case", function () {
+    var res = validFn({ multiLowercase: ["AAA", "BBB", "CCC"] });
+    expect(res.multiLowercase[0]).to.be.equal("aaa");
+    expect(res.multiLowercase[1]).to.be.equal("bbb");
+    expect(res.multiLowercase[2]).to.be.equal("ccc");
+  });
+});
+
+describe("StringSchema.uppercase", function () {
+  it("casts String to upper case", function () {
+    var res = validFn({ singleUppercase: "AbCdEfG" });
+    expect(res.singleUppercase).to.be.equal("ABCDEFG");
+  });
+  
+  it("casts [String] to uppercase", function () {
+    var res = validFn({ multiUppercase: ["aaa", "bbb", "ccc"] });
+    expect(res.multiUppercase[0]).to.be.equal("AAA");
+    expect(res.multiUppercase[1]).to.be.equal("BBB");
+    expect(res.multiUppercase[2]).to.be.equal("CCC");
+  });
+});
+
+describe("StringSchema.trim", function () {
+  it("trims String", function () {
+    var res = validFn({ singleTrim: "   aaa " });
+    expect(res.singleTrim).to.be.equal("aaa");
+  });
+  
+  it("trims [String]", function () {
+    var res = validFn({ multiTrim: ["aaa ", " bbb", "ccc"] });
+    expect(res.multiTrim[0]).to.be.equal("aaa");
+    expect(res.multiTrim[1]).to.be.equal("bbb");
+    expect(res.multiTrim[2]).to.be.equal("ccc");
   });
 });
