@@ -56,8 +56,8 @@ describe("NumberSchema.min", function () {
     });
     
     it("Number fails when value < min using custom message", function () {
-      var res = validFn({ multiMinCustom: 5 });
-      expect(res).to.be.equal("Woops! min 5 multiMinCustom");
+      var res = validFn({ singleMinCustom: 5 });
+      expect(res).to.be.equal("Woops! min 5 singleMinCustom");
     });
     
     it("[Number] fails when some values < min using custom message", function () {
@@ -108,8 +108,8 @@ describe("NumberSchema.max", function () {
     });
     
     it("Number fails when value > max using custom message", function () {
-      var res = validFn({ multiMaxCustom: 15 });
-      expect(res).to.be.equal("Woops! max 15 multiMaxCustom");
+      var res = validFn({ singleMaxCustom: 15 });
+      expect(res).to.be.equal("Woops! max 15 singleMaxCustom");
     });
     
     it("[Number] fails when some values < min using custom message", function () {
