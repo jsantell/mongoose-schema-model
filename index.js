@@ -12,12 +12,12 @@ var Model = function (schema, options) {
 Model.prototype = {
   get: function (key, value, context) {
     var definition = this._schema[key];
-    return schemaGet(definition, key, value, context);
+    return definition ? schemaGet(definition, key, value, context) : value;
   },
 
   set: function (key, value, context) {
     var definition = this._schema[key];
-    return schemaSet(definition, key, value, context);
+    return definition ? schemaSet(definition, key, value, context) : { value: value, error: null };
   }
 };
 

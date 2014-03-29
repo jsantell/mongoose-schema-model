@@ -1,5 +1,5 @@
 {
-  "name": "mongoose-schema-validation",
+  "name": "mongoose-schema-model",
   "description": "Validation and formatting, converting MongooseDB schema definitions to be used in any environment",
   "version": "0.0.1",
   "main": "./index.js",
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/jsantell/mongoose-schema-validation"
+    "url": "http://github.com/jsantell/mongoose-schema-model"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter spec --ui bdd"
@@ -22,6 +22,7 @@
     "schema",
     "validation",
     "formatting",
+    "model",
     "backbone"
   ],
   "author": {
