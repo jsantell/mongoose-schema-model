@@ -30,5 +30,17 @@
     "url": "http://github.com/jsantell"
   },
   "license": "MIT",
-  "engines": ["node >= 0.10.2"]
+  "testling": {
+    "browsers": {
+      "ie": [8, 9, 10],
+      "firefox": [25, "nightly"],
+      "chrome": [30, "canary"],
+      "opera": [12, "next"],
+      "safari": [5.1, 6]
+    },
+    "harness": "mocha",
+    "files": [
+      "test/test.*.js"
+    ]
+  }
 }
