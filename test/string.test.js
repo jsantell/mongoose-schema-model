@@ -21,6 +21,14 @@ var schema = {
 
 var model = Model(schema);
 
+describe("StringSchema transforms", function () {
+  it("transforms only if value is a string", function () {
+    var res = model.set('singleLowercase', 100);
+    expect(res.value).to.be.equal("100");
+    expect(res.error).to.be.equal(null);
+  });
+});
+
 describe("StringSchema.match", function () {
   describe("Passes", function () {
     it("String passes when match.test(value)", function () {
